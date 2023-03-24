@@ -36,6 +36,13 @@
 
 
 -- 12: Statistics on Employees: Number of Female/Male employees, Average age of employees? Number of employees over 50? Under 30? teddy
+-- ADD EMP_GENDER COLUMN TO EMPLOYEE
+select count(case when EMP_GENDER = 'F' then 1 end) as NumberOfFemales, 
+	   count(case when EMP_GENDER = 'M' then 1 end) as NumberOfMales,
+	   avg(datediff(year, emp_dob, getdate())) as 'AVG AGE', 
+	   count(case when datediff(year, emp_dob, getdate()) > 50 then 1 end) as 'A > 50', 
+	   count(case when datediff(year, emp_dob, getdate()) < 30 then 1 end) as 'A < 30' 
+	   from Employee;
 
 
 -- 13: List of employees who has the mandatory certification expiring in the next 6 weeks? teddy
