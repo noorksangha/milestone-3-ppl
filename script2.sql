@@ -35,16 +35,16 @@
 -- 11: Number of vacation days an employee has available
 
 
--- 12: Statistics on Employees: Number of Female/Male employees, Average age of employees? Number of employees over 50? Under 30
+-- 12: Statistics on Employees: Number of Female/Male employees, Average age of employees? Number of employees over 50? Under 30? teddy
 
 
--- 13: List of employees who has the mandatory certification expiring in the next 6 weeks
+-- 13: List of employees who has the mandatory certification expiring in the next 6 weeks? teddy
 
 
 -- 14: List of employees who need updated in-house training
 
 
--- 15: List of employees who have expired training
+-- 15: List of employees who have expired training? teddy
 
 
 -- 16: How many uniforms remain un-allocated?
