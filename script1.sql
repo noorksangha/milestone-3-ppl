@@ -354,4 +354,11 @@ VALUES(2,2,'YES'),
 (9,2,'YES'),
 (10,2,'YES');
 
+
+INSERT INTO WRITTEN_WARNING(WW_ID,WW_DATE,WW_OFFENCE,WW_LEVEL,WW_COMMENTS,EMP_ID)
+VALUES(1,'2021-01-03','On phone during shift.',1,'issue discussed', 6),
+(2,'2022-01-01','On phone during shift.',2,'issue discussed',6),
+(3,'2022-05-01','used slot machine',2,'issue discussed',8),
+(4,'2022-07-01','yelled at customer',2,'issue discussed',9),
+(5,'2012-04-01','On phone during shift.',2,'issue discussed',10);
 */
