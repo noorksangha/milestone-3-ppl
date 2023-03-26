@@ -68,13 +68,13 @@ select count(case when EMP_GENDER = 'F' then 1 end) as NumberOfFemales,
 
 
 -- 13: List of employees who has the mandatory certification expiring in the next 6 weeks? teddy
-
+select * from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6;
 
 -- 14: List of employees who need updated in-house training
 
 
 -- 15: List of employees who have expired training? teddy
-
+select * from CERTIFICATION where DATEDIFF(day, CERT_VALID_FOR, GETDATE()) > 0;
 
 -- 16: How many uniforms remain un-allocated?
 
