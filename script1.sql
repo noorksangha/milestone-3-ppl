@@ -361,4 +361,16 @@ VALUES(1,'2021-01-03','On phone during shift.',1,'issue discussed', 6),
 (3,'2022-05-01','used slot machine',2,'issue discussed',8),
 (4,'2022-07-01','yelled at customer',2,'issue discussed',9),
 (5,'2012-04-01','On phone during shift.',2,'issue discussed',10);
+
+INSERT INTO LEAVE(LEAVE_ID,LEAVE_TYPE,LEAVE_START,LEAVE_END,LEAVE_COMMENT,EMP_ID)
+VALUES(1,'s','2023-01-01','2023-01-02',NULL,6),
+(2,'v','2023-02-01','2023-01-02',NULL,6),
+(3,'s','2023-01-01','2023-01-01',NULL,5),
+(4,'s','2023-01-05','2023-01-05',NULL,5),
+(5,'v','2023-03-11','2023-03-14',NULL,1),
+(6,'s','2023-03-23','2023-03-26',NULL,1),
+(7,'s','2023-03-23','2023-03-24',NULL,3),
+(8,'v','2023-04-23','2023-04-25',NULL,3),
+(9,'v','2023-06-23','2023-03-24',NULL,2),
+(10,'s','2023-03-23','2023-03-24',NULL,9);
 */
