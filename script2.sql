@@ -56,6 +56,28 @@ LEFT JOIN
 
 
 -- 11: Number of vacation days an employee has available
+WITH VacationLeaves AS (
+    SELECT
+        EMP_ID,
+        SUM(DATEDIFF(LEAVE_END, LEAVE_START) + 1) AS VacationDaysTaken
+    FROM
+        LEAVE
+    WHERE
+        LEAVE_TYPE = 'Vacation'
+    GROUP BY
+        EMP_ID
+)
+SELECT
+    E.EMP_ID,
+    E.EMP_FNAME,
+    E.EMP_LNAME,
+    E.EMP_VAC_ENTITLEMENT - COALESCE(VL.VacationkDaysTaken, 0) AS AvailableVacationDays
+FROM
+    EMPLOYEE E
+LEFT JOIN
+    VacationLeaves VL
+    ON E.EMP_ID = VL.EMP_ID;
+
 
 
 -- 12: Statistics on Employees: Number of Female/Male employees, Average age of employees? Number of employees over 50? Under 30? teddy
