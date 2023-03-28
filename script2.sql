@@ -30,27 +30,28 @@
 
 
 -- 10: Number of sick days an employee has available? Brendan WIP
-WITH used_sick_days AS (
-  SELECT
-    EMP_ID,
-    COALESCE(SUM(JULIANDAY(LEAVE_END) - JULIANDAY(LEAVE_START)) + 1, 0) AS used_days
-  FROM
-    LEAVE
-  WHERE
-    LEAVE_TYPE = 'Sick'
-  GROUP BY
-    EMP_ID
+WITH SickLeaves AS (
+    SELECT
+        EMP_ID,
+        SUM(DATEDIFF(LEAVE_END, LEAVE_START) + 1) AS SickDaysTaken
+    FROM
+        LEAVE
+    WHERE
+        LEAVE_TYPE = 'Sick'
+    GROUP BY
+        EMP_ID
 )
 SELECT
-  e.EMP_ID,
-  e.EMP_FNAME,
-  e.EMP_LNAME,
-  e.EMP_SICK_ENTITLEMENT - IFNULL(usd.used_days, 0) AS available_sick_days
+    E.EMP_ID,
+    E.EMP_FNAME,
+    E.EMP_LNAME,
+    E.EMP_SICK_ENTITLEMENT - COALESCE(SL.SickDaysTaken, 0) AS AvailableSickDays
 FROM
-  EMPLOYEE e
-  LEFT JOIN used_sick_days usd ON e.EMP_ID = usd.EMP_ID
-WHERE
-  e.EMP_ID = :employee_id;
+    EMPLOYEE E
+LEFT JOIN
+    SickLeaves SL
+    ON E.EMP_ID = SL.EMP_ID;
+
 
 
 
