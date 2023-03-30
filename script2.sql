@@ -2,7 +2,32 @@
 
 
 
--- 1: Number of hours each employee worked per week?
+-- 1: Number of hours each employee worked per week? Brendan, creates the columns but doesnt get any values, not sure if query is broken or table doesnt have necessary data.
+SELECT
+    E.EMP_ID,
+    E.EMP_FNAME,
+    E.EMP_LNAME,
+    YEAR(S.SCH_DATE) AS Year,
+    DATEPART(WEEK, S.SCH_DATE) AS Week,
+    SUM(DATEDIFF(MINUTE, SH.SHIFT_START, SH.SHIFT_END)) / 60.0 AS HoursWorked
+FROM
+    EMPLOYEE E
+INNER JOIN
+    SCHEDULE S
+    ON E.EMP_ID = S.EMP_ID
+INNER JOIN
+    S_SHIFT SH
+    ON S.SCH_ID = SH.SCH_ID
+GROUP BY
+    E.EMP_ID,
+    E.EMP_FNAME,
+    E.EMP_LNAME,
+    YEAR(S.SCH_DATE),
+    DATEPART(WEEK, S.SCH_DATE)
+ORDER BY
+    E.EMP_ID,
+    Year,
+    Week;
 
 
 -- 2:Number of labor hours last week?
