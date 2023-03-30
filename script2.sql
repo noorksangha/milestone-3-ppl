@@ -33,7 +33,7 @@
 WITH SickLeaves AS (
     SELECT
         EMP_ID,
-        SUM(DATEDIFF(LEAVE_END, LEAVE_START) + 1) AS SickDaysTaken
+        SUM(DATEDIFF(day, LEAVE_END, LEAVE_START) + 1) AS SickDaysTaken
     FROM
         LEAVE
     WHERE
@@ -53,13 +53,11 @@ LEFT JOIN
     ON E.EMP_ID = SL.EMP_ID;
 
 
-
-
 -- 11: Number of vacation days an employee has available
 WITH VacationLeaves AS (
     SELECT
         EMP_ID,
-        SUM(DATEDIFF(LEAVE_END, LEAVE_START) + 1) AS VacationDaysTaken
+        SUM(DATEDIFF(day, LEAVE_END, LEAVE_START) + 1) AS VacationDaysTaken
     FROM
         LEAVE
     WHERE
@@ -71,13 +69,12 @@ SELECT
     E.EMP_ID,
     E.EMP_FNAME,
     E.EMP_LNAME,
-    E.EMP_VAC_ENTITLEMENT - COALESCE(VL.VacationkDaysTaken, 0) AS AvailableVacationDays
+    E.EMP_VAC_ENTITLEMENT - COALESCE(VL.VacationDaysTaken, 0) AS AvailableVacationDays
 FROM
     EMPLOYEE E
 LEFT JOIN
     VacationLeaves VL
     ON E.EMP_ID = VL.EMP_ID;
-
 
 
 -- 12: Statistics on Employees: Number of Female/Male employees, Average age of employees? Number of employees over 50? Under 30? teddy
