@@ -47,12 +47,34 @@ ORDER BY
 
 -- 7: Number of active Written Warning (WW) employee A has?
 
+USE CasinoSlot;
+SELECT COUNT(*) AS ActiveWWCount
+FROM WRITTEN_WARNING
+WHERE EMP_ID = 6 AND WW_LEVEL > 0;
+
+GO
+
 
 -- 8: List of active WW sorted by date and employee
+
+USE CasinoSlot;
+SELECT *
+FROM WRITTEN_WARNING
+WHERE WW_LEVEL > 0
+ORDER BY WW_DATE, EMP_ID;
+
+GO
 
 
 -- 9: A list of an employee's discipline/performance actions
 
+USE CasinoSlot;
+SELECT EMP_ID, WW_OFFENCE, WW_DATE
+FROM WRITTEN_WARNING
+WHERE WW_LEVEL > 0
+ORDER BY EMP_ID, WW_DATE;
+
+GO
 
 -- 10: Number of sick days an employee has available? Brendan WIP
 WITH SickLeaves AS (
