@@ -35,14 +35,33 @@ ORDER BY
 
 -- 3: List of which employees worked breaker shifts in the last month?
 
+select distinct EMP_ID from S_SHIFT
+where SHIFT_TYPE = 'B'
+AND SHIFT_END >= (DATEADD(month, -1, GETDATE()))
+
 
 -- 4: How many breaker shifts are scheduled this week?
+SELECT COUNT(*) as num_breaker_shifts
+FROM S_SHIFT
+WHERE shift_type = 'B'
+AND SHIFT_START >= DATEADD(week, DATEDIFF(week, 0, GETDATE()), 0)
+AND SHIFT_START < DATEADD(week, DATEDIFF(week, 0, GETDATE()), 7)
 
 
 -- 5: How many Slot Attendants are scheduled today?
+SELECT COUNT(*) as num_slot_attendants
+FROM S_SHIFT
+WHERE SHIFT_TYPE = 'S'
+AND SHIFT_START = CONVERT(date, GETDATE())
 
 
 -- 6: Any Slot Attendants who have not been assigned to Section NORTH in the last month
+SELECT DISTINCT EMP_ID
+FROM S_SHIFT ss
+JOIN FLOOR_SECTION s ON ss.SEC_ID = s.SEC_ID
+WHERE SHIFT_TYPE = 'S'
+AND s.SEC_NAME != 'NORTH'
+AND SHIFT_START >= DATEADD(month, -1, GETDATE())
 
 
 -- 7: Number of active Written Warning (WW) employee A has?
