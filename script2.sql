@@ -164,7 +164,9 @@ select count(case when EMP_GENDER = 'F' then 1 end) as NumberOfFemales,
 
 
 -- 13: List of employees who has the mandatory certification expiring in the next 6 weeks? teddy
-select * from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6;
+select * from EMPLOYEE where ROLE_ID in 
+	(select ROLE_ID from ROLE_CERTIFICATION where CERTIFICATION_ID 
+	in (select CERTIFICATION_ID from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6));
 
 -- 14: List of employees who need updated in-house training JAINA
 SELECT DISTINCT
@@ -184,7 +186,9 @@ WHERE
 
 
 -- 15: List of employees who have expired training? teddy
-select * from CERTIFICATION where DATEDIFF(day, CERT_VALID_FOR, GETDATE()) > 0;
+select * from EMPLOYEE where ROLE_ID in 
+	(select ROLE_ID from ROLE_CERTIFICATION where CERTIFICATION_ID in 
+	(select CERTIFICATION_ID from CERTIFICATION where DATEDIFF(day, CERT_VALID_FOR, GETDATE()) > 0));
 
 -- 16: How many uniforms remain un-allocated? JAINA
 SELECT (SELECT INV_QTY FROM INVENTORY WHERE INV_TITLE = 'uniform') - (SELECT COUNT(*) FROM EMPLOYEE)
