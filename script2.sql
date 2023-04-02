@@ -31,6 +31,16 @@ ORDER BY
 
 
 -- 2:Number of labor hours last week?
+SELECT
+    SUM(DATEDIFF(MINUTE, SH.SHIFT_START, SH.SHIFT_END)) / 60.0 AS LABOUR_HOURS
+FROM
+	S_SHIFT SH
+INNER JOIN
+    SCHEDULE S
+    ON S.SCH_ID = SH.SCH_ID
+WHERE
+	S.SCH_DATE >= DATEADD(week, -1, GETDATE()) 
+	AND S.SCH_DATE < GETDATE();
 
 
 -- 3: List of which employees worked breaker shifts in the last month?
