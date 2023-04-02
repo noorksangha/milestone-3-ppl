@@ -30,7 +30,7 @@ ORDER BY
     Week;
 
 
--- 2:Number of labor hours last week?
+-- 2:Number of labor hours last week? JAINA
 SELECT
     SUM(DATEDIFF(MINUTE, SH.SHIFT_START, SH.SHIFT_END)) / 60.0 AS LABOUR_HOURS
 FROM
@@ -172,7 +172,8 @@ select * from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6;
 -- 15: List of employees who have expired training? teddy
 select * from CERTIFICATION where DATEDIFF(day, CERT_VALID_FOR, GETDATE()) > 0;
 
--- 16: How many uniforms remain un-allocated?
-
+-- 16: How many uniforms remain un-allocated? JAINA
+SELECT (SELECT INV_QTY FROM INVENTORY WHERE INV_TITLE = 'uniform') - (SELECT COUNT(*) FROM EMPLOYEE)
+	AS UNALLOCATED_UNIFORMS
 
 
