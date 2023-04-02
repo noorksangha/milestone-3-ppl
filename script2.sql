@@ -166,7 +166,21 @@ select count(case when EMP_GENDER = 'F' then 1 end) as NumberOfFemales,
 -- 13: List of employees who has the mandatory certification expiring in the next 6 weeks? teddy
 select * from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6;
 
--- 14: List of employees who need updated in-house training
+-- 14: List of employees who need updated in-house training JAINA
+SELECT DISTINCT
+	E.EMP_FNAME, C.CERT_NAME
+FROM 
+	EMPLOYEE E
+INNER JOIN
+	ROLE_CERTIFICATION RC
+	ON
+	E.ROLE_ID = RC.ROLE_ID
+INNER JOIN
+	CERTIFICATION C
+	ON
+	RC.CERTIFICATION_ID = C.CERTIFICATION_ID
+WHERE 
+	C.CERT_VALID_FOR < GETDATE()
 
 
 -- 15: List of employees who have expired training? teddy
