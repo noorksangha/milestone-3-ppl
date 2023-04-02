@@ -168,7 +168,7 @@ select * from CERTIFICATION where DATEDIFF(week,getdate(), CERT_VALID_FOR) < 6;
 
 -- 14: List of employees who need updated in-house training JAINA
 SELECT DISTINCT
-	E.EMP_FNAME, C.CERT_NAME
+	E.EMP_ID, C.CERT_NAME
 FROM 
 	EMPLOYEE E
 INNER JOIN
